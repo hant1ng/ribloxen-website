@@ -3,6 +3,7 @@ export const site = {
   company:'昆山日不落自动化设备有限公司',
   url:'https://ribloxen.com',
   description:'RIBLOXEN 日不落自动化，为自动化设备采购提供标准零部件选型、非标零件需求对接与多品类采购服务。',
+  rfqOnline:false,
   contact:{
     name:'韩娟',
     phone:'18915758302',

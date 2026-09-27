@@ -1,10 +1,74 @@
 ---
 import Base from '../layouts/Base.astro';
+import {site} from '../data/site';
 ---
-<Base title="联系询价：整理标准件与非标件采购需求" description="整理自动化标准件型号、非标零件要求、数量和交期，生成询价清单。" crumbs={[{name:'联系询价',url:'/rfq/'}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">REQUEST FOR QUOTATION</p><h1>一份需求，清晰开始。</h1><p>请提供已知信息。规格不完整的地方，可以直接说明。</p></div></section><section class="section"><div class="wrap split"><form id="rfq-form"><div class="notice" id="availability" role="status">正在检查在线接收状态。也可以直接下载询价清单，下载不会发送给我们。</div><div class="form-grid"><label>需求类型<select name="type"><option value="standard">标准件采购</option><option value="custom">非标零件</option><option value="mixed">综合采购</option></select></label><label>公司名称<input name="company" maxlength="120" autocomplete="organization"/></label><label>联系人 <span aria-hidden="true">*</span><input name="name" required maxlength="60" autocomplete="name"/></label><label>手机或邮箱 <span aria-hidden="true">*</span><input name="contact" required maxlength="150" autocomplete="off"/></label><label class="full">产品名称或型号<input name="product" maxlength="200" placeholder="可填写多个名称或型号"/></label><label>数量与单位<input name="quantity" maxlength="100" placeholder="例如：10 件、2 套"/></label><label>期望到货日期<input type="date" name="date"/></label><label class="full">需求说明 <span aria-hidden="true">*</span><textarea name="details" rows="6" required minlength="5" maxlength="5000" placeholder="标准件：型号、规格、是否允许替代。非标件：材质、图纸版本、公差、表面处理及数量。请勿填入敏感图纸内容。"></textarea></label><label class="honey" aria-hidden="true">网站<input name="website" tabindex="-1" autocomplete="off"/></label><label class="checkbox full"><input type="checkbox" name="consent" required/><span>我已阅读<a href="/privacy/">隐私说明</a>，同意将以上信息用于处理本次询价。</span></label></div><div class="actions"><button class="button" type="submit" id="submit-rfq" disabled>提交询价 ↗</button><button class="button secondary" type="button" id="download-rfq">下载询价清单 ↓</button></div><div class="form-status" id="form-status" role="status" aria-live="polite"></div><noscript><p class="notice">在线提交需要启用 JavaScript。当前无法提交，请启用后重试。</p></noscript></form><aside><div class="service" style="background:var(--pale)"><p class="eyebrow">BEFORE YOU SEND</p><h2>让沟通少一次往返</h2><ul><li>品牌和型号请保留完整后缀</li><li>数量写清单位，区分件与套</li><li>非标要求注明图纸版本</li><li>替代选型请说明允许范围</li></ul><p class="notice">当前不支持附件上传。图纸请在确认接收渠道及保密要求后另行传递。</p><a class="text-link" href="/knowledge/rfq-checklist/">查看询价准备指南 ↗</a></div></aside></div></section><script>
-const form=document.querySelector<HTMLFormElement>('#rfq-form')!;const status=document.querySelector<HTMLElement>('#form-status')!;const button=document.querySelector<HTMLButtonElement>('#submit-rfq')!;const availability=document.querySelector<HTMLElement>('#availability')!;const started=Date.now();const params=new URLSearchParams(location.search);const product=form.elements.namedItem('product') as HTMLInputElement;if(params.get('product'))product.value=params.get('product')!.slice(0,200);const type=form.elements.namedItem('type') as HTMLSelectElement;if(['standard','custom','mixed'].includes(params.get('type')||''))type.value=params.get('type')!;
-fetch('/api/rfq').then(async r=>{const v=await r.json();if(r.ok&&v.ready===true){button.disabled=false;availability.textContent='在线询价已启用。信息仅用于本次询价沟通。';}else{availability.textContent='在线接收尚未启用。可先下载询价清单保存；下载不会发送给我们。';}}).catch(()=>{availability.textContent='暂时无法连接在线接收服务。可先下载询价清单，稍后再试。';});
+<Base title="联系询价：整理标准件与非标件采购需求" description="整理自动化标准件型号、非标零件要求、数量和交期，下载询价清单并通过企业邮箱或电话联系 RIBLOXEN。" crumbs={[{name:'联系询价',url:'/rfq/'}]}>
+<section class="page-intro"><div class="wrap"><p class="eyebrow">REQUEST FOR QUOTATION</p><h1>把需求整理清楚，再开始报价沟通。</h1><p>在线提交暂未启用。可以在本页生成询价清单，再发送到企业邮箱，或直接电话联系。</p></div></section>
+<section class="section"><div class="wrap split">
+<form id="rfq-form">
+  <div class="notice">当前不会把表单内容提交到服务器。下载询价清单后，请发送至 <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>，或联系 {site.contact.name}：<a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a>。</div>
+  <div class="form-grid">
+    <label>需求类型<select name="type"><option value="standard">标准件采购</option><option value="custom">非标零件</option><option value="mixed">综合采购</option></select></label>
+    <label>公司名称<input name="company" maxlength="120" autocomplete="organization"/></label>
+    <label>联系人 <span aria-hidden="true">*</span><input name="name" required maxlength="60" autocomplete="name"/></label>
+    <label>手机或邮箱 <span aria-hidden="true">*</span><input name="contact" required maxlength="150" autocomplete="off"/></label>
+    <label class="full">产品名称或型号<input name="product" maxlength="200" placeholder="可填写多个名称或型号"/></label>
+    <label>数量与单位<input name="quantity" maxlength="100" placeholder="例如：10 件、2 套"/></label>
+    <label>期望到货日期<input type="date" name="date"/></label>
+    <label class="full">需求说明 <span aria-hidden="true">*</span><textarea name="details" rows="6" required minlength="5" maxlength="5000" placeholder="标准件：型号、规格、是否允许替代。非标件：材质、图纸版本、公差、表面处理及数量。"></textarea></label>
+  </div>
+  <div class="actions">
+    <button class="button" type="button" id="download-rfq">下载询价清单 ↓</button>
+    <a class="button secondary" href={`mailto:${site.contact.email}?subject=RIBLOXEN%20询价`}>发送邮件 ↗</a>
+  </div>
+  <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+</form>
+<aside>
+  <div class="service" style="background:var(--pale)">
+    <p class="eyebrow">CONTACT</p>
+    <h2>{site.contact.name}</h2>
+    <p><a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a><br/><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+    <h3>询价前建议准备</h3>
+    <ul><li>品牌和完整型号后缀</li><li>数量与单位</li><li>非标件图纸版本</li><li>是否接受替代型号</li><li>期望到货时间</li></ul>
+    <p class="notice">当前不支持附件上传。敏感图纸请先确认接收渠道及保密要求。</p>
+    <a class="text-link" href="/knowledge/rfq-checklist/">查看询价准备指南 ↗</a>
+  </div>
+</aside>
+</div></section>
+<script>
+const form=document.querySelector<HTMLFormElement>('#rfq-form')!;
+const status=document.querySelector<HTMLElement>('#form-status')!;
+const params=new URLSearchParams(location.search);
+const product=form.elements.namedItem('product') as HTMLInputElement;
+if(params.get('product')) product.value=params.get('product')!.slice(0,200);
+const type=form.elements.namedItem('type') as HTMLSelectElement;
+if(['standard','custom','mixed'].includes(params.get('type')||'')) type.value=params.get('type')!;
 function values(){return Object.fromEntries(new FormData(form).entries());}
-form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity()||button.disabled)return;button.disabled=true;status.textContent='正在提交，请稍候。';try{const r=await fetch('/api/rfq',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...values(),started})});const result=await r.json();if(!r.ok)throw new Error(result.message||'提交未完成，请稍后重试。');status.textContent=`询价已接收，编号 ${result.id}。请保存此编号。`;form.reset();}catch(error){status.textContent=error instanceof Error?error.message:'提交未完成，信息未确认接收。';}finally{button.disabled=false;}});
-document.querySelector('#download-rfq')?.addEventListener('click',()=>{if(!form.reportValidity())return;const v=values();const types={standard:'标准件采购',custom:'非标零件',mixed:'综合采购'};const body=['RIBLOXEN 询价清单','此文件仅已下载，尚未发送。',`生成日期：${new Date().toLocaleDateString('zh-CN')}`,`类型：${types[v.type as keyof typeof types]}`,`公司：${v.company}`,`联系人：${v.name}`,`联系方式：${v.contact}`,`产品：${v.product}`,`数量：${v.quantity}`,`期望到货：${v.date}`,'需求说明：',String(v.details)].join('\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='RIBLOXEN-询价清单.txt';a.click();URL.revokeObjectURL(url);status.textContent='询价清单已下载。尚未发送给我们，请妥善保存其中的联系方式。';});
-</script></Base>
+document.querySelector('#download-rfq')?.addEventListener('click',()=>{
+  if(!form.reportValidity()) return;
+  const v=values();
+  const types={standard:'标准件采购',custom:'非标零件',mixed:'综合采购'};
+  const body=[
+    'RIBLOXEN 询价清单',
+    '请将此文件发送至 han.ting@ribloxen.com',
+    `生成日期：${new Date().toLocaleDateString('zh-CN')}`,
+    `类型：${types[v.type as keyof typeof types]}`,
+    `公司：${v.company||''}`,
+    `联系人：${v.name||''}`,
+    `联系方式：${v.contact||''}`,
+    `产品：${v.product||''}`,
+    `数量：${v.quantity||''}`,
+    `期望到货：${v.date||''}`,
+    '需求说明：',
+    String(v.details||'')
+  ].join('\n');
+  const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='RIBLOXEN-询价清单.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+  status.textContent='询价清单已下载。请通过企业邮箱发送给我们，下载本身不会提交任何数据。';
+});
+</script>
+</Base>
