@@ -13,7 +13,7 @@ const pages={
 'privacy':{title:'隐私说明',en:'PRIVACY',visual:'machine-accessories',desc:'说明 RIBLOXEN 网站当前如何处理访问和询价信息。',sections:[['当前询价状态','在线询价接收功能目前关闭。询价页填写的信息仅在浏览器中用于生成本地询价清单，下载操作不会把表单内容发送到本站服务器。'],['通过邮件或电话联系','当你主动发送邮件或拨打电话时，相应联系方式和业务内容用于处理询价与后续业务沟通。请避免发送与采购无关的敏感个人信息。'],['网站访问','网站托管于 Cloudflare。基础访问可能由托管服务处理必要的网络信息。本站当前不加载 Google Analytics、广告追踪脚本或第三方验证码。'],['图纸与敏感资料','当前网站不提供图纸上传。涉及图纸、技术文件或保密资料时，请先联系确认接收渠道和保密要求。'],['隐私联系',`如需查询、更正或删除已通过业务沟通提供的信息，请联系 ${site.contact.email}。`]],faq:[]}
 };
 
-export function getStaticPaths(){return Object.keys(pages).map(page=>({params:{page}}));}
+export function getStaticPaths(){return ['custom-parts','solutions','industries','capabilities','about','contact','privacy'].map(page=>({params:{page}}));}
 const page=Astro.params.page as keyof typeof pages;
 const data=pages[page];
 ---
