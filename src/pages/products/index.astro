@@ -5,6 +5,7 @@ import {categories} from '../../data/site';
 import {getCollection} from 'astro:content';
 const allProducts=await getCollection('products');
 const categoryRows=categories.map(c=>({...c,count:allProducts.filter(p=>p.data.category===c.slug).length}));
+import Icon from '../../components/Icon.astro';
 ---
 <Base title="产品中心：自动化标准件与非标加工件" description="按机械功能浏览直线运动、定位夹具、旋转运动、传动、输送、气动、结构、紧固与非标加工件采购方向。" crumbs={[{name:'产品中心',url:'/products/'}]}>
 <section class="page-intro page-intro-visual">
@@ -13,7 +14,7 @@ const categoryRows=categories.map(c=>({...c,count:allProducts.filter(p=>p.data.c
       <p class="eyebrow">PRODUCTS / FA COMPONENTS</p>
       <h1>产品中心</h1>
       <p>按机械功能进入产品，再根据尺寸、负载、材料、安装方式和使用环境整理询价条件。</p>
-      <div class="actions"><a class="button" href="/rfq/">按清单询价 ↗</a><a class="button secondary" href="/search/">搜索产品与资料 ↗</a></div>
+      <div class="actions"><a class="button" href="/rfq/">按清单询价 <Icon /></a><a class="button secondary" href="/search/">搜索产品与资料 <Icon /></a></div>
     </div>
     <div class="intro-stat">
       <strong>{allProducts.length}</strong>
@@ -29,7 +30,7 @@ const categoryRows=categories.map(c=>({...c,count:allProducts.filter(p=>p.data.c
         <a class="visual-category" href={`/products/${c.slug}/`}>
           <ProductVisual slug={c.slug} label={c.name} compact={true}/>
           <div class="visual-category-copy">
-            <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>{c.count} 项 ↗</span></div>
+            <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>{c.count} 项 <Icon /></span></div>
             <h2>{c.name}</h2>
             <small>{c.en}</small>
             <p>{c.items.join(' · ')}</p>
