@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import ProductVisual from '../../components/ProductVisual.astro';
 import {getCollection} from 'astro:content';
 const articles=await getCollection('knowledge');
+import Icon from '../../components/Icon.astro';
 ---
 <Base title="技术资料与采购沟通指南" description="标准件询价、非标加工图纸与替代选型核对指南，帮助整理自动化零部件采购需求。" crumbs={[{name:'技术资料',url:'/knowledge/'}]}>
 <section class="product-hero generic-hero">
@@ -24,7 +25,7 @@ const articles=await getCollection('knowledge');
           <p class="eyebrow">{a.data.tag}</p>
           <h2>{a.data.title}</h2>
           <p>{a.data.description}</p>
-          <span class="text-link">阅读资料 ↗</span>
+          <span class="text-link">阅读资料 <Icon /></span>
         </div>
       </a>
     )}
