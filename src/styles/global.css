@@ -111,7 +111,7 @@
 /* Original RIBLOXEN brand mark direction */
 .brand-logo{display:block;color:inherit;line-height:0}
 .ribloxen-logo{display:block;width:310px;max-width:100%}
-.ribloxen-logo svg{display:block;width:100%;height:auto}
+.ribloxen-logo svg,.ribloxen-logo img{display:block;width:100%;height:auto}
 .footer-logo .ribloxen-logo{width:255px}
 @media(max-width:1100px){.ribloxen-logo{width:270px}}
 @media(max-width:480px){.ribloxen-logo{width:220px}.footer-logo .ribloxen-logo{width:230px}}
