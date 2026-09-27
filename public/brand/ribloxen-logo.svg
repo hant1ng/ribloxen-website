@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 333" role="img" aria-labelledby="title desc">
+  <title id="title">RIBLOXEN</title>
+  <desc id="desc">RIBLOXEN Automation Parts Solutions</desc>
+  <defs>
+    <linearGradient id="ribloxenBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1268C9"/>
+      <stop offset="100%" stop-color="#004A9F"/>
+    </linearGradient>
+  </defs>
+  <text x="30" y="205"
+        font-family="Arial Black, Arial, Helvetica, sans-serif"
+        font-size="178"
+        font-weight="900"
+        letter-spacing="-9"
+        fill="url(#ribloxenBlue)">RIBLOXEN</text>
+  <text x="34" y="277"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="34"
+        font-weight="600"
+        letter-spacing="16"
+        fill="#1F2937">AUTOMATION PARTS SOLUTIONS</text>
+</svg>
