@@ -5,7 +5,7 @@ import Logo from '../components/Logo.astro';
 import Icon from '../components/Icon.astro';
 const {title,description=site.description,noindex=false,crumbs=[]}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
-const logoUrl=new URL('/brand/ribloxen-logo.webp',site.url).href;
+const logoUrl=new URL('/brand/ribloxen-logo.png',site.url).href;
 const baiduVerification=import.meta.env.PUBLIC_BAIDU_SITE_VERIFICATION;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification=import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
