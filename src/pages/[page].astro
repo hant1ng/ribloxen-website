@@ -16,6 +16,7 @@ const pages={
 export function getStaticPaths(){return ['custom-parts','solutions','industries','capabilities','about','contact','privacy'].map(page=>({params:{page}}));}
 const page=Astro.params.page as keyof typeof pages;
 const data=pages[page];
+import Icon from '../components/Icon.astro';
 ---
 <Base title={data.title} description={data.desc} crumbs={[{name:data.title,url:`/${page}/`}]}>
 <section class="product-hero generic-hero">
@@ -24,7 +25,7 @@ const data=pages[page];
       <p class="eyebrow">{data.en}</p>
       <h1>{data.title}</h1>
       <p>{data.desc}</p>
-      {page==='contact'&&<div class="actions"><a class="button" href={`tel:${site.contact.phone}`}>电话联系 ↗</a><a class="button secondary" href={`mailto:${site.contact.email}`}>发送邮件 ↗</a></div>}
+      {page==='contact'&&<div class="actions"><a class="button" href={`tel:${site.contact.phone}`}>电话联系 <Icon /></a><a class="button secondary" href={`mailto:${site.contact.email}`}>发送邮件 <Icon /></a></div>}
     </div>
     <ProductVisual slug={data.visual} label={data.title}/>
   </div>
@@ -45,8 +46,8 @@ const data=pages[page];
         <p class="eyebrow">NEXT STEP</p>
         <h2>从具体需求开始</h2>
         <p>已知型号、图纸要求或需要解决的问题，都可以整理成一份清单。</p>
-        <a class="button" href="/rfq/">整理询价需求 ↗</a>
-        <a class="text-link" href="/products/">查看产品中心 ↗</a>
+        <a class="button" href="/rfq/">整理询价需求 <Icon /></a>
+        <a class="text-link" href="/products/">查看产品中心 <Icon /></a>
       </div>
     </aside>
   </div>
