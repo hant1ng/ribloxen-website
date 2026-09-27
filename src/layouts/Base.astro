@@ -5,6 +5,7 @@ import Logo from '../components/Logo.astro';
 import Icon from '../components/Icon.astro';
 const {title,description=site.description,noindex=false,crumbs=[]}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
+const logoUrl=new URL('/brand/ribloxen-logo.webp',site.url).href;
 const baiduVerification=import.meta.env.PUBLIC_BAIDU_SITE_VERIFICATION;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification=import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
@@ -15,9 +16,19 @@ const jsonld=[
     name:site.company,
     alternateName:site.name,
     url:site.url,
+    logo:logoUrl,
     email:site.contact.email,
     telephone:site.contact.phone,
+    contactPoint:{'@type':'ContactPoint',telephone:site.contact.phone,email:site.contact.email,contactType:'sales',areaServed:'CN',availableLanguage:['zh-CN']},
     address:{'@type':'PostalAddress',addressLocality:'昆山',addressCountry:'CN'}
+  },
+  {
+    '@context':'https://schema.org',
+    '@type':'WebSite',
+    name:site.name,
+    alternateName:site.company,
+    url:site.url,
+    inLanguage:'zh-CN'
   },
   ...(crumbs.length?[{
     '@context':'https://schema.org',
@@ -39,12 +50,19 @@ const jsonld=[
   <title>{title} | RIBLOXEN 日不落自动化</title>
   <meta name="description" content={description}/>
   <link rel="canonical" href={canonical}/>
-  <meta name="robots" content={noindex?'noindex,follow':'index,follow'}/>
+  <meta name="robots" content={noindex?'noindex,follow':'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}/>
   <meta property="og:title" content={title}/>
   <meta property="og:description" content={description}/>
   <meta property="og:url" content={canonical}/>
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="zh_CN"/>
+  <meta property="og:site_name" content={site.name}/>
+  <meta property="og:image" content={logoUrl}/>
+  <meta property="og:image:alt" content="RIBLOXEN Automation Parts Solutions"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content={title}/>
+  <meta name="twitter:description" content={description}/>
+  <meta name="twitter:image" content={logoUrl}/>
   <meta name="theme-color" content="#005bac"/>
   {baiduVerification&&<meta name="baidu-site-verification" content={baiduVerification}/>}
   {googleVerification&&<meta name="google-site-verification" content={googleVerification}/>}
