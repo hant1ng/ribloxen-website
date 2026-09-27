@@ -86,3 +86,16 @@
   .showcase-tabs{grid-template-columns:1fr}.showcase-tabs a{border-right:0;border-bottom:1px solid var(--line)}
   .service-visual-copy{padding:26px}.service-visual-art{padding:16px}
 }
+
+
+.generic-page-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:46px;align-items:start}
+.generic-sections{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.generic-card{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:28px;border:1px solid var(--line);background:#fff}
+.generic-card h2{font-size:23px}.generic-card p{font-size:14px;margin-bottom:0}.generic-index{font:22px monospace;color:#a8b6c2}
+.generic-aside{position:sticky;top:20px}.generic-aside .service{background:var(--pale)}.generic-aside .button{margin-bottom:18px}
+.knowledge-index-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.knowledge-index-card{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.knowledge-index-card:hover{background:#f7fafc}.knowledge-index-card.featured{background:#eef5fb}.knowledge-index-card h2{font-size:24px}.knowledge-index-card p{font-size:14px}
+.knowledge-index-number{font:30px monospace;color:#aab8c3}
+@media(max-width:900px){.generic-page-grid{grid-template-columns:1fr}.generic-aside{position:static}.generic-sections{grid-template-columns:1fr}.knowledge-index-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.generic-card,.knowledge-index-card{grid-template-columns:40px 1fr;padding:20px}.generic-index,.knowledge-index-number{font-size:18px}}
