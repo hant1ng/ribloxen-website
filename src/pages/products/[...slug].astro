@@ -1,8 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ProductVisual from '../../components/ProductVisual.astro';
 import {categories} from '../../data/site';
 import {getCollection,render} from 'astro:content';
-export async function getStaticPaths(){const all=await getCollection('products');return [...categories.map(category=>({params:{slug:category.slug},props:{category,product:null}})),...all.map(product=>({params:{slug:`${product.data.category}/${product.id}`},props:{category:categories.find(c=>c.slug===product.data.category),product}}))];}
+export async function getStaticPaths(){
+  const all=await getCollection('products');
+  return [
+    ...categories.map(category=>({params:{slug:category.slug},props:{category,product:null}})),
+    ...all.map(product=>({params:{slug:`${product.data.category}/${product.id}`},props:{category:categories.find(c=>c.slug===product.data.category),product}}))
+  ];
+}
 const {category,product}=Astro.props;
 const products=(await getCollection('products')).filter(p=>p.data.category===category.slug);
 const content=product?await render(product):null;
@@ -10,4 +17,65 @@ const Content=content?.Content;
 const title=product?product.data.title:category.name;
 const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/products/${category.slug}/`},...(product?[{name:title,url:Astro.url.pathname}]:[])];
 ---
-<Base title={`${title}采购与询价`} description={product?product.data.description:category.desc} crumbs={crumbs}><section class="page-intro"><div class="wrap"><p class="eyebrow">{category.en}</p><h1>{title}</h1><p>{product?product.data.description:category.desc}</p></div></section><section class="section"><div class="wrap content-grid"><aside class="side-nav" aria-label="产品分类">{categories.map(c=><a href={`/products/${c.slug}/`} aria-current={c.slug===category.slug?'page':undefined}>{c.name} ↗</a>)}</aside><div>{product?<><div class="prose">{Content&&<Content/>}</div><h2>询价核对项</h2><table class="details-table"><tbody>{product.data.checks.map((p,i)=><tr><th>确认项 0{i+1}</th><td>{p}</td></tr>)}</tbody></table><p class="notice">价格、规格、供货品牌及交期以实际确认的报价为准。此页不构成现货、代理授权或技术性能承诺。</p><a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>为此类产品整理询价 ↗</a></>:<><div class="card-list">{products.map(p=><a class="product-card" href={`/products/${category.slug}/${p.id}/`}><p class="eyebrow">SELECTION & SOURCING</p><h2>{p.data.title}</h2><p>{p.data.description}</p><span class="text-link">查看选型核对项 ↗</span></a>)}</div><h2 style="margin-top:40px">还可以沟通这些需求</h2><p>{category.items.join('、')}等。具体供货范围需结合型号与要求核实。</p><div class="notice">初次沟通建议提供：{category.params.join('、')}。</div><a class="button" href={`/rfq/?product=${encodeURIComponent(category.name)}`}>提交此类询价需求 ↗</a></>}</div></div></section></Base>
+<Base title={`${title}采购与询价`} description={product?product.data.description:category.desc} crumbs={crumbs}>
+<section class="product-hero">
+  <div class="wrap product-hero-grid">
+    <div class="product-hero-copy">
+      <p class="eyebrow">{category.en}</p>
+      <h1>{title}</h1>
+      <p>{product?product.data.description:category.desc}</p>
+      {product&&<div class="product-quick-tags">{product.data.checks.slice(0,3).map((x)=><span>{x}</span>)}</div>}
+      <div class="actions"><a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>整理询价需求 ↗</a><a class="button secondary" href="/contact/">直接联系 ↗</a></div>
+    </div>
+    <ProductVisual slug={category.slug} label={title}/>
+  </div>
+</section>
+
+<section class="section product-body">
+  <div class="wrap content-grid">
+    <aside class="side-nav" aria-label="产品分类">
+      <p class="eyebrow">CATEGORIES</p>
+      {categories.map(c=><a href={`/products/${c.slug}/`} aria-current={c.slug===category.slug?'page':undefined}>{c.name}<span>↗</span></a>)}
+    </aside>
+    <div>
+      {product?
+        <>
+          <div class="product-content-layout">
+            <div class="prose">{Content&&<Content/>}</div>
+            <aside class="spec-panel">
+              <p class="eyebrow">RFQ CHECKLIST</p>
+              <h2>询价核对项</h2>
+              <ol>{product.data.checks.map((p,i)=><li><b>{String(i+1).padStart(2,'0')}</b><span>{p}</span></li>)}</ol>
+              <a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>询价此类产品 ↗</a>
+            </aside>
+          </div>
+          <p class="notice">价格、规格、供货品牌及交期以实际确认的报价为准。页面内容用于采购沟通，不构成现货、代理授权或技术性能承诺。</p>
+        </>
+        :
+        <>
+          <div class="category-product-grid">
+            {products.map((p,i)=>
+              <a class="category-product-card" href={`/products/${category.slug}/${p.id}/`}>
+                <ProductVisual slug={category.slug} label={p.data.title} compact={true}/>
+                <div class="category-product-copy">
+                  <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>↗</span></div>
+                  <h2>{p.data.title}</h2>
+                  <p>{p.data.description}</p>
+                  <span class="text-link">查看选型核对项 ↗</span>
+                </div>
+              </a>
+            )}
+          </div>
+          <div class="category-guide">
+            <p class="eyebrow">SELECTION INPUT</p>
+            <h2>询价前建议准备</h2>
+            <div class="guide-tags">{category.params.map(p=><span>{p}</span>)}</div>
+            <p>还可以沟通：{category.items.join('、')}等。具体供货范围需结合品牌、型号与实际要求核实。</p>
+            <a class="button" href={`/rfq/?product=${encodeURIComponent(category.name)}`}>提交此类询价需求 ↗</a>
+          </div>
+        </>
+      }
+    </div>
+  </div>
+</section>
+</Base>
