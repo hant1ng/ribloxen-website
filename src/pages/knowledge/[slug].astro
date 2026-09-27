@@ -1,5 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';import {getCollection,render} from 'astro:content';export async function getStaticPaths(){return(await getCollection('knowledge')).map(article=>({params:{slug:article.id},props:{article}}));}const {article}=Astro.props;const {Content}=await render(article);
 import Icon from '../../components/Icon.astro';
+import {site} from '../../data/site';
+const articleSchema={
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:article.data.title,
+  description:article.data.description,
+  mainEntityOfPage:new URL(Astro.url.pathname,site.url).href,
+  inLanguage:'zh-CN',
+  author:{'@type':'Organization',name:site.company,url:site.url},
+  publisher:{'@type':'Organization',name:site.company,url:site.url,logo:{'@type':'ImageObject',url:new URL('/brand/ribloxen-logo.webp',site.url).href}}
+};
 ---
-<Base title={article.data.title} description={article.data.description} crumbs={[{name:'技术资料',url:'/knowledge/'},{name:article.data.title,url:Astro.url.pathname}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">{article.data.tag}</p><h1>{article.data.title}</h1><p>{article.data.description}</p></div></section><section class="section"><article class="wrap"><div class="prose"><Content/></div><p class="notice">本文用于采购信息整理。具体技术参数及安全使用要求，请以对应产品的厂家资料与工程确认结果为准。</p><a class="button" href="/rfq/">按指南整理询价需求 <Icon /></a></article></section></Base>
+<Base title={article.data.title} description={article.data.description} crumbs={[{name:'技术资料',url:'/knowledge/'},{name:article.data.title,url:Astro.url.pathname}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">{article.data.tag}</p><h1>{article.data.title}</h1><p>{article.data.description}</p></div></section><section class="section"><article class="wrap"><div class="prose"><Content/></div><p class="notice">本文用于采购信息整理。具体技术参数及安全使用要求，请以对应产品的厂家资料与工程确认结果为准。</p><a class="button" href="/rfq/">按指南整理询价需求 <Icon /></a></article></section><script type="application/ld+json" set:html={JSON.stringify(articleSchema).replace(/</g,'\\u003c')}/></Base>
