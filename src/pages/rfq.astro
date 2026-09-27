@@ -19,7 +19,7 @@ import Icon from '../components/Icon.astro';
     <label class="full">需求说明 <span aria-hidden="true">*</span><textarea name="details" rows="6" required minlength="5" maxlength="5000" placeholder="标准件：型号、规格、是否允许替代。非标件：材质、图纸版本、公差、表面处理及数量。"></textarea></label>
   </div>
   <div class="actions">
-    <button class="button" type="button" id="download-rfq">下载询价清单 ↓</button>
+    <button class="button" type="button" id="download-rfq">下载询价清单 <Icon name="download" /></button>
     <a class="button secondary" href={`mailto:${site.contact.email}?subject=RIBLOXEN%20询价`}>发送邮件 <Icon /></a>
   </div>
   <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
