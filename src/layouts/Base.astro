@@ -3,6 +3,104 @@ import '../styles/global.css';
 import {site,nav} from '../data/site';
 const {title,description=site.description,noindex=false,crumbs=[]}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
-const jsonld=[{'@context':'https://schema.org','@type':'Organization',name:site.company,alternateName:site.name,url:site.url},...(crumbs.length?[{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{name:'首页',url:'/'},...crumbs].map((x:any,i:number)=>({'@type':'ListItem',position:i+1,name:x.name,item:new URL(x.url,site.url).href}))}]:[])];
+const baiduVerification=import.meta.env.PUBLIC_BAIDU_SITE_VERIFICATION;
+const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerification=import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+const jsonld=[
+  {
+    '@context':'https://schema.org',
+    '@type':'Organization',
+    name:site.company,
+    alternateName:site.name,
+    url:site.url,
+    email:site.contact.email,
+    telephone:site.contact.phone,
+    address:{'@type':'PostalAddress',addressLocality:'昆山',addressCountry:'CN'}
+  },
+  ...(crumbs.length?[{
+    '@context':'https://schema.org',
+    '@type':'BreadcrumbList',
+    itemListElement:[{name:'首页',url:'/'},...crumbs].map((x:any,i:number)=>({
+      '@type':'ListItem',
+      position:i+1,
+      name:x.name,
+      item:new URL(x.url,site.url).href
+    }))
+  }]:[])
+];
 ---
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title} | RIBLOXEN 日不落自动化</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><meta name="robots" content={noindex?'noindex,follow':'index,follow'}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:type" content="website"/><meta property="og:locale" content="zh_CN"/><meta name="theme-color" content="#005bac"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><script type="application/ld+json" set:html={JSON.stringify(jsonld).replace(/</g,'\\u003c')}/></head><body><a class="skip" href="#main">跳转到正文</a><div class="utility"><div class="wrap"><span>昆山日不落自动化设备有限公司</span><span>STANDARD PARTS · CUSTOM PARTS</span></div></div><header><div class="wrap header-inner"><a class="brand" href="/" aria-label="RIBLOXEN 首页"><span>RIBLO<span class="brand-x">X</span>EN</span><small>AUTOMATION PARTS SOLUTIONS</small></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">菜单 <span>＋</span></button><nav id="navigation" aria-label="主导航">{nav.map(([label,href])=><a href={href} aria-current={Astro.url.pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a class="nav-search" href="/search/" aria-label="搜索产品与资料">搜索</a><a class="button small" href="/rfq/">联系询价 <span>↗</span></a></nav></div></header>{crumbs.length>0&&<div class="wrap breadcrumbs"><a href="/">首页</a>{crumbs.map((x:any)=><><span>/</span><a href={x.url}>{x.name}</a></>)}</div>}<main id="main"><slot/></main><footer><div class="wrap footer-grid"><div><a class="brand" href="/"><span>RIBLOXEN</span><small>AUTOMATION PARTS SOLUTIONS</small></a><p>连接零部件需求与供应。<br/>让设备采购更清晰。</p></div><div><h2>产品与服务</h2><a href="/products/">产品中心</a><a href="/custom-parts/">非标零件</a><a href="/solutions/">采购解决方案</a><a href="/industries/">应用行业</a></div><div><h2>了解 RIBLOXEN</h2><a href="/about/">关于我们</a><a href="/capabilities/">服务与交付</a><a href="/knowledge/">技术资料</a><a href="/contact/">联系我们</a></div><div><h2>从一份需求开始</h2><p>型号、清单或图纸要求，<br/>都可以成为沟通的起点。</p><a class="footer-cta" href="/rfq/">整理询价需求 ↗</a></div></div><div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {site.company}</span><a href="/privacy/">隐私说明</a><span>中国 · 昆山</span></div></footer><script>const toggle=document.querySelector('.menu-toggle');toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));document.querySelector('#navigation')?.classList.toggle('open',!open);});</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{title} | RIBLOXEN 日不落自动化</title>
+  <meta name="description" content={description}/>
+  <link rel="canonical" href={canonical}/>
+  <meta name="robots" content={noindex?'noindex,follow':'index,follow'}/>
+  <meta property="og:title" content={title}/>
+  <meta property="og:description" content={description}/>
+  <meta property="og:url" content={canonical}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="zh_CN"/>
+  <meta name="theme-color" content="#005bac"/>
+  {baiduVerification&&<meta name="baidu-site-verification" content={baiduVerification}/>}
+  {googleVerification&&<meta name="google-site-verification" content={googleVerification}/>}
+  {bingVerification&&<meta name="msvalidate.01" content={bingVerification}/>}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonld).replace(/</g,'\\u003c')}/>
+</head>
+<body>
+<a class="skip" href="#main">跳转到正文</a>
+<div class="utility"><div class="wrap"><span>{site.company}</span><span>{site.contact.phone} · {site.contact.email}</span></div></div>
+<header>
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="RIBLOXEN 首页"><span>RIBLO<span class="brand-x">X</span>EN</span><small>AUTOMATION PARTS SOLUTIONS</small></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">菜单 <span>＋</span></button>
+    <nav id="navigation" aria-label="主导航">
+      {nav.map(([label,href])=><a href={href} aria-current={Astro.url.pathname.startsWith(href)?'page':undefined}>{label}</a>)}
+      <a class="nav-search" href="/search/" aria-label="搜索产品与资料">搜索</a>
+      <a class="button small" href="/rfq/">联系询价 <span>↗</span></a>
+    </nav>
+  </div>
+</header>
+{crumbs.length>0&&<div class="wrap breadcrumbs"><a href="/">首页</a>{crumbs.map((x:any)=><><span>/</span><a href={x.url}>{x.name}</a></>)}</div>}
+<main id="main"><slot/></main>
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="/"><span>RIBLOXEN</span><small>AUTOMATION PARTS SOLUTIONS</small></a>
+      <p>自动化标准零部件、非标零件与多品类采购需求对接。</p>
+    </div>
+    <div>
+      <h2>产品与服务</h2>
+      <a href="/products/">产品中心</a>
+      <a href="/custom-parts/">非标零件</a>
+      <a href="/solutions/">采购解决方案</a>
+      <a href="/industries/">应用行业</a>
+    </div>
+    <div>
+      <h2>了解 RIBLOXEN</h2>
+      <a href="/about/">关于我们</a>
+      <a href="/capabilities/">服务与交付</a>
+      <a href="/knowledge/">技术资料</a>
+      <a href="/contact/">联系我们</a>
+    </div>
+    <div>
+      <h2>联系询价</h2>
+      <p>{site.contact.name}<br/><a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a><br/><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+      <a class="footer-cta" href="/rfq/">整理询价需求 ↗</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {site.company}</span><a href="/privacy/">隐私说明</a><span>{site.contact.location}</span></div>
+</footer>
+<script>
+const toggle=document.querySelector('.menu-toggle');
+toggle?.addEventListener('click',()=>{
+  const open=toggle.getAttribute('aria-expanded')==='true';
+  toggle.setAttribute('aria-expanded',String(!open));
+  document.querySelector('#navigation')?.classList.toggle('open',!open);
+});
+</script>
+</body>
+</html>
