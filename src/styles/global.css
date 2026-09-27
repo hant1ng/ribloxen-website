@@ -99,3 +99,19 @@
 .knowledge-index-number{font:30px monospace;color:#aab8c3}
 @media(max-width:900px){.generic-page-grid{grid-template-columns:1fr}.generic-aside{position:static}.generic-sections{grid-template-columns:1fr}.knowledge-index-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.generic-card,.knowledge-index-card{grid-template-columns:40px 1fr;padding:20px}.generic-index,.knowledge-index-number{font-size:18px}}
+
+
+/* Local icon system based on Lucide geometry */
+.ui-icon{display:inline-block;vertical-align:-.18em;flex:0 0 auto}
+.button .ui-icon,.text-link .ui-icon,.footer-cta .ui-icon,.side-nav .ui-icon{width:16px;height:16px}
+.text-link,.footer-cta{display:inline-flex;align-items:center;gap:7px}
+.category-top .ui-icon{width:15px;height:15px}
+.side-nav a{align-items:center}
+
+/* Original RIBLOXEN brand mark direction */
+.brand-logo{display:block;color:inherit;line-height:0}
+.ribloxen-logo{display:block;width:310px;max-width:100%}
+.ribloxen-logo svg{display:block;width:100%;height:auto}
+.footer-logo .ribloxen-logo{width:255px}
+@media(max-width:1100px){.ribloxen-logo{width:270px}}
+@media(max-width:480px){.ribloxen-logo{width:220px}.footer-logo .ribloxen-logo{width:230px}}
