@@ -16,6 +16,7 @@ const content=product?await render(product):null;
 const Content=content?.Content;
 const title=product?product.data.title:category.name;
 const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/products/${category.slug}/`},...(product?[{name:title,url:Astro.url.pathname}]:[])];
+import Icon from '../../components/Icon.astro';
 ---
 <Base title={`${title}采购与询价`} description={product?product.data.description:category.desc} crumbs={crumbs}>
 <section class="product-hero">
@@ -25,7 +26,7 @@ const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/p
       <h1>{title}</h1>
       <p>{product?product.data.description:category.desc}</p>
       {product&&<div class="product-quick-tags">{product.data.checks.slice(0,3).map((x)=><span>{x}</span>)}</div>}
-      <div class="actions"><a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>整理询价需求 ↗</a><a class="button secondary" href="/contact/">直接联系 ↗</a></div>
+      <div class="actions"><a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>整理询价需求 <Icon /></a><a class="button secondary" href="/contact/">直接联系 <Icon /></a></div>
     </div>
     <ProductVisual slug={category.slug} label={title}/>
   </div>
@@ -35,7 +36,7 @@ const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/p
   <div class="wrap content-grid">
     <aside class="side-nav" aria-label="产品分类">
       <p class="eyebrow">CATEGORIES</p>
-      {categories.map(c=><a href={`/products/${c.slug}/`} aria-current={c.slug===category.slug?'page':undefined}>{c.name}<span>↗</span></a>)}
+      {categories.map(c=><a href={`/products/${c.slug}/`} aria-current={c.slug===category.slug?'page':undefined}>{c.name}<span><Icon /></span></a>)}
     </aside>
     <div>
       {product?
@@ -46,7 +47,7 @@ const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/p
               <p class="eyebrow">RFQ CHECKLIST</p>
               <h2>询价核对项</h2>
               <ol>{product.data.checks.map((p,i)=><li><b>{String(i+1).padStart(2,'0')}</b><span>{p}</span></li>)}</ol>
-              <a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>询价此类产品 ↗</a>
+              <a class="button" href={`/rfq/?product=${encodeURIComponent(title)}`}>询价此类产品 <Icon /></a>
             </aside>
           </div>
           <p class="notice">价格、规格、供货品牌及交期以实际确认的报价为准。页面内容用于采购沟通，不构成现货、代理授权或技术性能承诺。</p>
@@ -58,10 +59,10 @@ const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/p
               <a class="category-product-card" href={`/products/${category.slug}/${p.id}/`}>
                 <ProductVisual slug={category.slug} label={p.data.title} compact={true}/>
                 <div class="category-product-copy">
-                  <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>↗</span></div>
+                  <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span><Icon /></span></div>
                   <h2>{p.data.title}</h2>
                   <p>{p.data.description}</p>
-                  <span class="text-link">查看选型核对项 ↗</span>
+                  <span class="text-link">查看选型核对项 <Icon /></span>
                 </div>
               </a>
             )}
@@ -71,7 +72,7 @@ const crumbs=[{name:'产品中心',url:'/products/'},{name:category.name,url:`/p
             <h2>询价前建议准备</h2>
             <div class="guide-tags">{category.params.map(p=><span>{p}</span>)}</div>
             <p>还可以沟通：{category.items.join('、')}等。具体供货范围需结合品牌、型号与实际要求核实。</p>
-            <a class="button" href={`/rfq/?product=${encodeURIComponent(category.name)}`}>提交此类询价需求 ↗</a>
+            <a class="button" href={`/rfq/?product=${encodeURIComponent(category.name)}`}>提交此类询价需求 <Icon /></a>
           </div>
         </>
       }
