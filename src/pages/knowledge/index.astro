@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro';import {getCollection} from 'astro:content';const articles=await getCollection('knowledge');
+---
+<Base title="技术资料与采购沟通指南" description="标准件询价、非标加工图纸与替代选型核对指南，帮助整理自动化零部件采购需求。" crumbs={[{name:'技术资料',url:'/knowledge/'}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">KNOWLEDGE & RESOURCES</p><h1>技术资料</h1><p>把型号说完整，把要求写清楚。为选型沟通与采购确认提供一份参考。</p></div></section><section class="section"><div class="wrap article-grid">{articles.map(a=><a class="product-card" href={`/knowledge/${a.id}/`}><p class="eyebrow">{a.data.tag}</p><h2>{a.data.title}</h2><p>{a.data.description}</p><span class="text-link">阅读资料 ↗</span></a>)}</div></section></Base>

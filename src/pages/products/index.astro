@@ -1,0 +1,5 @@
+---
+import Base from '../../layouts/Base.astro';
+import {categories} from '../../data/site';
+---
+<Base title="产品中心：自动化标准件与非标加工件" description="浏览直线运动、传动、定位紧固、气动、结构防护与非标加工件采购方向，了解询价所需规格信息。" crumbs={[{name:'产品中心',url:'/products/'}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">PRODUCTS</p><h1>产品中心</h1><p>从零部件类别找到需求入口。已有完整型号，也可以直接整理询价清单。</p><div class="actions"><a class="button" href="/rfq/">按清单询价 ↗</a><a class="button secondary" href="/search/">搜索产品与资料 ↗</a></div></div></section><section class="section"><div class="wrap"><div class="catalog">{categories.map((c,i)=><a class="category" href={`/products/${c.slug}/`}><div class="category-top"><span>0{i+1}</span><span>↗</span></div><h2>{c.name}</h2><p>{c.desc}</p><small>{c.en}</small><p class="tags">{c.items.join(' / ')}</p></a>)}</div><p class="notice">本目录展示采购沟通方向，不代表库存清单或品牌代理授权。具体产品供应情况需逐项核实。</p></div></section></Base>

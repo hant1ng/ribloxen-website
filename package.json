@@ -1,0 +1,22 @@
+{
+  "name": "ribloxen-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.18.3",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0",
+    "test": "node tests/rfq.test.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.14.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
