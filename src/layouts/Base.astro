@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import {site,nav} from '../data/site';
+import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
 const {title,description=site.description,noindex=false,crumbs=[]}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
 const baiduVerification=import.meta.env.PUBLIC_BAIDU_SITE_VERIFICATION;
@@ -55,12 +57,12 @@ const jsonld=[
 <div class="utility"><div class="wrap"><span>{site.company}</span><span>{site.contact.phone} · {site.contact.email}</span></div></div>
 <header>
   <div class="wrap header-inner">
-    <a class="brand" href="/" aria-label="RIBLOXEN 首页"><span>RIBLO<span class="brand-x">X</span>EN</span><small>AUTOMATION PARTS SOLUTIONS</small></a>
+    <a class="brand brand-logo" href="/" aria-label="RIBLOXEN 首页"><Logo /></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">菜单 <span>＋</span></button>
     <nav id="navigation" aria-label="主导航">
       {nav.map(([label,href])=><a href={href} aria-current={Astro.url.pathname.startsWith(href)?'page':undefined}>{label}</a>)}
       <a class="nav-search" href="/search/" aria-label="搜索产品与资料">搜索</a>
-      <a class="button small" href="/rfq/">联系询价 <span>↗</span></a>
+      <a class="button small" href="/rfq/">联系询价 <span><Icon /></span></a>
     </nav>
   </div>
 </header>
@@ -69,7 +71,7 @@ const jsonld=[
 <footer>
   <div class="wrap footer-grid">
     <div>
-      <a class="brand" href="/"><span>RIBLOXEN</span><small>AUTOMATION PARTS SOLUTIONS</small></a>
+      <a class="brand brand-logo footer-logo" href="/" aria-label="RIBLOXEN 首页"><Logo compact={true}/></a>
       <p>自动化标准零部件、非标零件与多品类采购需求对接。</p>
     </div>
     <div>
@@ -89,7 +91,7 @@ const jsonld=[
     <div>
       <h2>联系询价</h2>
       <p>{site.contact.name}<br/><a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a><br/><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
-      <a class="footer-cta" href="/rfq/">整理询价需求 ↗</a>
+      <a class="footer-cta" href="/rfq/">整理询价需求 <Icon /></a>
     </div>
   </div>
   <div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {site.company}</span><a href="/privacy/">隐私说明</a><span>{site.contact.location}</span></div>

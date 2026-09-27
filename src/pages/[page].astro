@@ -1,31 +1,57 @@
 ---
 import Base from '../layouts/Base.astro';
+import ProductVisual from '../components/ProductVisual.astro';
 import {site} from '../data/site';
 
 const pages={
-'custom-parts':{title:'非标零件服务',en:'CUSTOM PARTS',desc:'从图纸和实际用途出发，确认材料、加工要求与验收条件，再对接适合的供应资源。',sections:[['可以从哪些零件开始','板类、支架、轴类、套类以及治具工装零件，可以按图纸逐项沟通。实际加工可行性与供货范围需评估确认。'],['把要求放在同一份清单里','提供有效版本图纸、材料牌号、数量、关键公差、表面处理和期望交期。首次试制与后续批量需求请分开说明。'],['先确认，再推进','收到需求后，核对图纸完整性与关键条件。工艺、价格、交期、检验资料和包装要求应在订单前明确。'],['图纸与保密','当前网站不接收图纸文件。请先通过邮箱或电话联系，确认接收渠道与保密要求后再传递文件。']],faq:[['没有完整图纸，可以询价吗？','可以先描述用途并整理样件或尺寸信息。正式报价与加工仍需要确认明确、可执行的技术要求。'],['能保证特定精度和交期吗？','需要根据材料、结构、工艺、数量和验收条件评估。未经评估的精度或交期不能作为承诺。']]},
-'solutions':{title:'采购解决方案',en:'PROCUREMENT SOLUTIONS',desc:'围绕采购清单、非标需求和备件补充，减少信息遗漏，让每一项需求可以被核对。',sections:[['设备配套采购','将同一项目的标准件按类别、型号、数量和期望交期整理。对于跨品类需求，逐项核实供应条件与可接受的替代范围。'],['非标与标准件协同','将需要按图沟通的零件与标准型号分开列示，在同一项目中分别确认技术要求、报价与交付节点。'],['备件与替代需求','保留原部件完整型号、铭牌、安装尺寸和设备工况。停产或缺货型号可沟通替代方向，具体方案由使用方确认适用性。']],faq:[['一张清单可以包含多种产品吗？','可以。建议每行写清名称、品牌、完整型号、数量和单位，并标记是否允许替代。'],['可以先询问其中几项吗？','可以。优先整理影响设备进度的项目，并说明期望交付日期。']]},
-'industries':{title:'应用行业',en:'APPLICATIONS',desc:'服务沟通围绕零部件和设备需求展开。以下为可对接的应用场景，不代表已完成的客户案例。',sections:[['非标自动化设备','装配、搬运、定位与检测设备中的运动、连接和结构零件需求。'],['包装与通用机械','传动、导向、气动和设备调节部件的选型与采购沟通。'],['电子装配与工装治具','定位销、支架、夹紧件以及按图沟通的治具零件。'],['工厂设备维护','按原型号和工况整理备件更换需求，对替代条件逐项核实。']],faq:[]},
-'capabilities':{title:'服务与交付',en:'SERVICE & DELIVERY',desc:'用清晰的需求、可核对的规格和提前约定的验收条件，建立采购协作。',sections:[['需求核对','检查型号是否完整、图纸版本是否一致、数量与单位是否明确。对于缺失信息，先列明再确认。'],['供应资源对接','依据已确认的需求对接相应资源。供货品牌、加工方式与实际供应能力需逐项核实。'],['商务条件确认','报价应明确价格、税费口径、运费、交期、付款条件及有效期。以双方确认的订单或合同为准。'],['交付与反馈','按约定跟进进度，核对数量和资料。到货异常应保留产品标识、照片与相关记录，以便对照订单处理。']],faq:[['是否有自有工厂或自有仓库？','本网站不作未经核实的自有工厂、仓储或设备能力声明。具体产品的供应方式可在询价时确认。']]},
-'about':{title:'关于日不落自动化',en:'ABOUT RIBLOXEN',desc:'RIBLOXEN 是昆山日不落自动化设备有限公司的品牌表达，聚焦自动化标准零部件与非标零件需求。',sections:[['连接需求与供应','从一份型号清单、一张图纸要求或一个设备问题开始，协助整理采购信息，对接零部件供应资源。'],['面向设备采购的实际工作','希望与非标自动化设备厂、系统集成商、机械设备制造商及工厂维护团队建立清晰、持续的采购沟通。'],['把信息说清楚','具体供货范围、规格、价格、交期与验收条件，在需求核实后确认。对无法确认的信息保留说明，避免把展示内容当作供货承诺。']],faq:[]},
-'contact':{title:'联系我们',en:'CONTACT',desc:'标准件型号、采购清单或非标零件需求，都可以直接联系韩娟沟通。',sections:[['昆山日不落自动化设备有限公司',`品牌：RIBLOXEN\n联系人：${site.contact.name}\n所在地：${site.contact.location}`],['电话',site.contact.phone],['企业邮箱',site.contact.email],['询价准备','标准件请提供名称、完整型号与数量；非标件请整理材料、图纸版本、数量及关键要求。当前在线提交暂不启用，可先下载询价清单，再通过企业邮箱发送。']],faq:[]},
-'privacy':{title:'隐私说明',en:'PRIVACY',desc:'说明 RIBLOXEN 网站当前如何处理访问和询价信息。',sections:[['当前询价状态','在线询价接收功能目前关闭。询价页填写的信息仅在浏览器中用于生成本地询价清单，下载操作不会把表单内容发送到本站服务器。'],['通过邮件或电话联系','当你主动发送邮件或拨打电话时，相应联系方式和业务内容用于处理询价与后续业务沟通。请避免发送与采购无关的敏感个人信息。'],['网站访问','网站托管于 Cloudflare。基础访问可能由托管服务处理必要的网络信息。本站当前不加载 Google Analytics、广告追踪脚本或第三方验证码。'],['图纸与敏感资料','当前网站不提供图纸上传。涉及图纸、技术文件或保密资料时，请先联系确认接收渠道和保密要求。'],['隐私联系',`如需查询、更正或删除已通过业务沟通提供的信息，请联系 ${site.contact.email}。`]],faq:[]}
+'custom-parts':{title:'非标零件服务',en:'CUSTOM PARTS',visual:'custom-machining',desc:'从图纸和实际用途出发，确认材料、加工要求与验收条件，再对接适合的供应资源。',sections:[['可以从哪些零件开始','板类、支架、轴类、套类以及治具工装零件，可以按图纸逐项沟通。实际加工可行性与供货范围需评估确认。'],['把要求放在同一份清单里','提供有效版本图纸、材料牌号、数量、关键公差、表面处理和期望交期。首次试制与后续批量需求请分开说明。'],['先确认，再推进','收到需求后，核对图纸完整性与关键条件。工艺、价格、交期、检验资料和包装要求应在订单前明确。'],['图纸与保密','当前网站不接收图纸文件。请先通过邮箱或电话联系，确认接收渠道与保密要求后再传递文件。']],faq:[['没有完整图纸，可以询价吗？','可以先描述用途并整理样件或尺寸信息。正式报价与加工仍需要确认明确、可执行的技术要求。'],['能保证特定精度和交期吗？','需要根据材料、结构、工艺、数量和验收条件评估。未经评估的精度或交期不能作为承诺。']]},
+'solutions':{title:'采购解决方案',en:'PROCUREMENT SOLUTIONS',visual:'transmission',desc:'围绕采购清单、非标需求和备件补充，减少信息遗漏，让每一项需求可以被核对。',sections:[['设备配套采购','将同一项目的标准件按类别、型号、数量和期望交期整理。对于跨品类需求，逐项核实供应条件与可接受的替代范围。'],['非标与标准件协同','将需要按图沟通的零件与标准型号分开列示，在同一项目中分别确认技术要求、报价与交付节点。'],['备件与替代需求','保留原部件完整型号、铭牌、安装尺寸和设备工况。停产或缺货型号可沟通替代方向，具体方案由使用方确认适用性。']],faq:[['一张清单可以包含多种产品吗？','可以。建议每行写清名称、品牌、完整型号、数量和单位，并标记是否允许替代。'],['可以先询问其中几项吗？','可以。优先整理影响设备进度的项目，并说明期望交付日期。']]},
+'industries':{title:'应用行业',en:'APPLICATIONS',visual:'linear-motion',desc:'服务沟通围绕零部件和设备需求展开。以下为可对接的应用场景，不代表已完成的客户案例。',sections:[['非标自动化设备','装配、搬运、定位与检测设备中的运动、连接和结构零件需求。'],['包装与通用机械','传动、导向、气动和设备调节部件的选型与采购沟通。'],['电子装配与工装治具','定位销、支架、夹紧件以及按图沟通的治具零件。'],['工厂设备维护','按原型号和工况整理备件更换需求，对替代条件逐项核实。']],faq:[]},
+'capabilities':{title:'服务与交付',en:'SERVICE & DELIVERY',visual:'structure',desc:'用清晰的需求、可核对的规格和提前约定的验收条件，建立采购协作。',sections:[['需求核对','检查型号是否完整、图纸版本是否一致、数量与单位是否明确。对于缺失信息，先列明再确认。'],['供应资源对接','依据已确认的需求对接相应资源。供货品牌、加工方式与实际供应能力需逐项核实。'],['商务条件确认','报价应明确价格、税费口径、运费、交期、付款条件及有效期。以双方确认的订单或合同为准。'],['交付与反馈','按约定跟进进度，核对数量和资料。到货异常应保留产品标识、照片与相关记录，以便对照订单处理。']],faq:[['是否有自有工厂或自有仓库？','本网站不作未经核实的自有工厂、仓储或设备能力声明。具体产品的供应方式可在询价时确认。']]},
+'about':{title:'关于日不落自动化',en:'ABOUT RIBLOXEN',visual:'rotary-motion',desc:'RIBLOXEN 是昆山日不落自动化设备有限公司的品牌表达，聚焦自动化标准零部件与非标零件需求。',sections:[['连接需求与供应','从一份型号清单、一张图纸要求或一个设备问题开始，协助整理采购信息，对接零部件供应资源。'],['面向设备采购的实际工作','希望与非标自动化设备厂、系统集成商、机械设备制造商及工厂维护团队建立清晰、持续的采购沟通。'],['把信息说清楚','具体供货范围、规格、价格、交期与验收条件，在需求核实后确认。对无法确认的信息保留说明，避免把展示内容当作供货承诺。']],faq:[]},
+'contact':{title:'联系我们',en:'CONTACT',visual:'positioning',desc:'标准件型号、采购清单或非标零件需求，都可以直接联系韩娟沟通。',sections:[['昆山日不落自动化设备有限公司',`品牌：RIBLOXEN\n联系人：${site.contact.name}\n所在地：${site.contact.location}`],['电话',site.contact.phone],['企业邮箱',site.contact.email],['询价准备','标准件请提供名称、完整型号与数量；非标件请整理材料、图纸版本、数量及关键要求。当前在线提交暂不启用，可先下载询价清单，再通过企业邮箱发送。']],faq:[]},
+'privacy':{title:'隐私说明',en:'PRIVACY',visual:'machine-accessories',desc:'说明 RIBLOXEN 网站当前如何处理访问和询价信息。',sections:[['当前询价状态','在线询价接收功能目前关闭。询价页填写的信息仅在浏览器中用于生成本地询价清单，下载操作不会把表单内容发送到本站服务器。'],['通过邮件或电话联系','当你主动发送邮件或拨打电话时，相应联系方式和业务内容用于处理询价与后续业务沟通。请避免发送与采购无关的敏感个人信息。'],['网站访问','网站托管于 Cloudflare。基础访问可能由托管服务处理必要的网络信息。本站当前不加载 Google Analytics、广告追踪脚本或第三方验证码。'],['图纸与敏感资料','当前网站不提供图纸上传。涉及图纸、技术文件或保密资料时，请先联系确认接收渠道和保密要求。'],['隐私联系',`如需查询、更正或删除已通过业务沟通提供的信息，请联系 ${site.contact.email}。`]],faq:[]}
 };
 
 export function getStaticPaths(){return ['custom-parts','solutions','industries','capabilities','about','contact','privacy'].map(page=>({params:{page}}));}
 const page=Astro.params.page as keyof typeof pages;
 const data=pages[page];
+import Icon from '../components/Icon.astro';
 ---
 <Base title={data.title} description={data.desc} crumbs={[{name:data.title,url:`/${page}/`}]}>
-<section class="page-intro"><div class="wrap"><p class="eyebrow">{data.en}</p><h1>{data.title}</h1><p>{data.desc}</p></div></section>
-<section class="section"><div class="wrap split"><div>
-  <div class="prose">{data.sections.map(([h,p])=><section><h2>{h}</h2><p style="white-space:pre-line">{p}</p></section>)}</div>
-  {page==='contact'&&<div class="actions">
-    <a class="button" href={`tel:${site.contact.phone}`}>电话联系 <span>↗</span></a>
-    <a class="button secondary" href={`mailto:${site.contact.email}`}>发送邮件 <span>↗</span></a>
-  </div>}
-  {data.faq.length>0&&<div class="faq"><h2 style="margin-top:40px">常见问题</h2>{data.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div>}
-</div>
-<aside><div class="service" style="background:var(--pale)"><p class="eyebrow">NEXT STEP</p><h2>从具体需求开始</h2><p>已知型号、图纸要求或需要解决的问题，都可以整理成一份清单。</p><a class="button" href="/rfq/">整理询价需求 ↗</a><a class="text-link" href="/products/">查看产品中心 ↗</a></div></aside>
-</div></section>
+<section class="product-hero generic-hero">
+  <div class="wrap product-hero-grid">
+    <div class="product-hero-copy">
+      <p class="eyebrow">{data.en}</p>
+      <h1>{data.title}</h1>
+      <p>{data.desc}</p>
+      {page==='contact'&&<div class="actions"><a class="button" href={`tel:${site.contact.phone}`}>电话联系 <Icon /></a><a class="button secondary" href={`mailto:${site.contact.email}`}>发送邮件 <Icon /></a></div>}
+    </div>
+    <ProductVisual slug={data.visual} label={data.title}/>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap generic-page-grid">
+    <div class="generic-sections">
+      {data.sections.map(([h,p],i)=>
+        <article class="generic-card">
+          <div class="generic-index">{String(i+1).padStart(2,'0')}</div>
+          <div><h2>{h}</h2><p style="white-space:pre-line">{p}</p></div>
+        </article>
+      )}
+      {data.faq.length>0&&<div class="faq"><h2>常见问题</h2>{data.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div>}
+    </div>
+    <aside class="generic-aside">
+      <div class="service">
+        <p class="eyebrow">NEXT STEP</p>
+        <h2>从具体需求开始</h2>
+        <p>已知型号、图纸要求或需要解决的问题，都可以整理成一份清单。</p>
+        <div class="aside-actions">
+          <a class="button" href="/rfq/">整理询价需求 <Icon /></a>
+          <a class="button secondary" href="/products/">查看产品中心 <Icon /></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
 </Base>

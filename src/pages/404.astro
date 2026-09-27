@@ -1,4 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 ---
-<Base title="页面未找到" noindex={true}><section class="section"><div class="wrap"><p class="eyebrow">404 / PAGE NOT FOUND</p><h1>这个页面没有找到。</h1><p>链接可能已更新。可以从产品中心重新查找需求。</p><div class="actions"><a class="button" href="/products/">浏览产品 ↗</a><a class="button secondary" href="/">返回首页 ↗</a></div></div></section></Base>
+<Base title="页面未找到" noindex={true}><section class="section"><div class="wrap"><p class="eyebrow">404 / PAGE NOT FOUND</p><h1>这个页面没有找到。</h1><p>链接可能已更新。可以从产品中心重新查找需求。</p><div class="actions"><a class="button" href="/products/">浏览产品 <Icon /></a><a class="button secondary" href="/">返回首页 <Icon /></a></div></div></section></Base>

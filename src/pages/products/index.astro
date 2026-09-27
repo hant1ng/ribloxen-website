@@ -1,11 +1,44 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ProductVisual from '../../components/ProductVisual.astro';
 import {categories} from '../../data/site';
 import {getCollection} from 'astro:content';
 const allProducts=await getCollection('products');
 const categoryRows=categories.map(c=>({...c,count:allProducts.filter(p=>p.data.category===c.slug).length}));
+import Icon from '../../components/Icon.astro';
 ---
 <Base title="产品中心：自动化标准件与非标加工件" description="按机械功能浏览直线运动、定位夹具、旋转运动、传动、输送、气动、结构、紧固与非标加工件采购方向。" crumbs={[{name:'产品中心',url:'/products/'}]}>
-<section class="page-intro"><div class="wrap"><p class="eyebrow">PRODUCTS</p><h1>产品中心</h1><p>参考 FA 自动化零部件的功能分类方式，从机械功能进入产品，再按规格整理询价需求。</p><div class="actions"><a class="button" href="/rfq/">按清单询价 ↗</a><a class="button secondary" href="/search/">搜索产品与资料 ↗</a></div></div></section>
-<section class="section"><div class="wrap"><div class="catalog">{categoryRows.map((c,i)=><a class="category" href={`/products/${c.slug}/`}><div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>{c.count} 项 ↗</span></div><h2>{c.name}</h2><p>{c.desc}</p><small>{c.en}</small><p class="tags">{c.items.join(' / ')}</p></a>)}</div><p class="notice">本目录展示采购沟通方向，不代表库存清单或品牌代理授权。具体产品供应情况需逐项核实。</p></div></section>
+<section class="page-intro page-intro-visual">
+  <div class="wrap intro-grid">
+    <div>
+      <p class="eyebrow">PRODUCTS / FA COMPONENTS</p>
+      <h1>产品中心</h1>
+      <p>按机械功能进入产品，再根据尺寸、负载、材料、安装方式和使用环境整理询价条件。</p>
+      <div class="actions"><a class="button" href="/rfq/">按清单询价 <Icon /></a><a class="button secondary" href="/search/">搜索产品与资料 <Icon /></a></div>
+    </div>
+    <div class="intro-stat">
+      <strong>{allProducts.length}</strong>
+      <span>个首批产品入口</span>
+      <small>{categories.length} PRODUCT CATEGORIES</small>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="visual-catalog product-catalog-page">
+      {categoryRows.map((c,i)=>
+        <a class="visual-category" href={`/products/${c.slug}/`}>
+          <ProductVisual slug={c.slug} label={c.name} compact={true}/>
+          <div class="visual-category-copy">
+            <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>{c.count} 项 <Icon /></span></div>
+            <h2>{c.name}</h2>
+            <small>{c.en}</small>
+            <p>{c.items.join(' · ')}</p>
+          </div>
+        </a>
+      )}
+    </div>
+    <p class="notice">产品页用于说明选型和采购沟通方向。具体品牌、型号、供货状态、价格和交期需要根据实际需求确认。</p>
+  </div>
+</section>
 </Base>

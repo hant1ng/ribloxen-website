@@ -7,7 +7,7 @@ export const site = {
   contact:{
     name:'韩娟',
     phone:'18915758302',
-    email:'han.ting@ribloxen.com',
+    email:'han.juan@ribloxen.com',
     location:'中国 · 昆山'
   }
 };

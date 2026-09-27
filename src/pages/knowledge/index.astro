@@ -1,4 +1,34 @@
 ---
-import Base from '../../layouts/Base.astro';import {getCollection} from 'astro:content';const articles=await getCollection('knowledge');
+import Base from '../../layouts/Base.astro';
+import ProductVisual from '../../components/ProductVisual.astro';
+import {getCollection} from 'astro:content';
+const articles=await getCollection('knowledge');
+import Icon from '../../components/Icon.astro';
 ---
-<Base title="技术资料与采购沟通指南" description="标准件询价、非标加工图纸与替代选型核对指南，帮助整理自动化零部件采购需求。" crumbs={[{name:'技术资料',url:'/knowledge/'}]}><section class="page-intro"><div class="wrap"><p class="eyebrow">KNOWLEDGE & RESOURCES</p><h1>技术资料</h1><p>把型号说完整，把要求写清楚。为选型沟通与采购确认提供一份参考。</p></div></section><section class="section"><div class="wrap article-grid">{articles.map(a=><a class="product-card" href={`/knowledge/${a.id}/`}><p class="eyebrow">{a.data.tag}</p><h2>{a.data.title}</h2><p>{a.data.description}</p><span class="text-link">阅读资料 ↗</span></a>)}</div></section></Base>
+<Base title="技术资料与采购沟通指南" description="标准件询价、非标加工图纸与替代选型核对指南，帮助整理自动化零部件采购需求。" crumbs={[{name:'技术资料',url:'/knowledge/'}]}>
+<section class="product-hero generic-hero">
+  <div class="wrap product-hero-grid">
+    <div class="product-hero-copy">
+      <p class="eyebrow">KNOWLEDGE & RESOURCES</p>
+      <h1>技术资料</h1>
+      <p>围绕自动化零部件选型、替代和非标询价，把实际采购中最容易遗漏的参数整理清楚。</p>
+    </div>
+    <ProductVisual slug="positioning" label="技术资料"/>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap knowledge-index-grid">
+    {articles.map((a,i)=>
+      <a class:list={['knowledge-index-card',i===0&&'featured']} href={`/knowledge/${a.id}/`}>
+        <div class="knowledge-index-number">{String(i+1).padStart(2,'0')}</div>
+        <div>
+          <p class="eyebrow">{a.data.tag}</p>
+          <h2>{a.data.title}</h2>
+          <p>{a.data.description}</p>
+          <span class="text-link">阅读资料 <Icon /></span>
+        </div>
+      </a>
+    )}
+  </div>
+</section>
+</Base>
