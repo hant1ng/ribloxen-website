@@ -4,6 +4,7 @@ import ProductVisual from '../components/ProductVisual.astro';
 import {categories,site} from '../data/site';
 import {getCollection} from 'astro:content';
 const articles=await getCollection('knowledge');
+import Icon from '../components/Icon.astro';
 ---
 <Base title="自动化零部件供应与非标零件服务">
 <section class="hero hero-v3">
@@ -13,8 +14,8 @@ const articles=await getCollection('knowledge');
       <h1>自动化零部件供应<br/>与<span>非标零件服务</span></h1>
       <p>围绕自动化设备的运动、定位、传动、结构和气动需求，帮助采购人员把型号、规格与非标要求整理清楚。</p>
       <div class="actions">
-        <a class="button" href="/products/">进入产品目录 <span>↗</span></a>
-        <a class="button secondary" href="/rfq/">整理询价需求 <span>↗</span></a>
+        <a class="button" href="/products/">进入产品目录 <span><Icon /></span></a>
+        <a class="button secondary" href="/rfq/">整理询价需求 <span><Icon /></span></a>
       </div>
       <div class="hero-contact">
         <span>CONTACT</span>
@@ -57,7 +58,7 @@ const articles=await getCollection('knowledge');
         <a class="visual-category" href={`/products/${c.slug}/`}>
           <ProductVisual slug={c.slug} label={c.name} compact={true}/>
           <div class="visual-category-copy">
-            <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span>↗</span></div>
+            <div class="category-top"><span>{String(i+1).padStart(2,'0')}</span><span><Icon /></span></div>
             <h3>{c.name}</h3>
             <small>{c.en}</small>
             <p>{c.items.join(' · ')}</p>
@@ -65,7 +66,7 @@ const articles=await getCollection('knowledge');
         </a>
       )}
     </div>
-    <div class="section-action"><a class="button secondary" href="/products/">查看完整产品目录 <span>↗</span></a></div>
+    <div class="section-action"><a class="button secondary" href="/products/">查看完整产品目录 <span><Icon /></span></a></div>
   </div>
 </section>
 
@@ -80,7 +81,7 @@ const articles=await getCollection('knowledge');
           <h3>已有型号，按清单采购</h3>
           <p>适用于品牌、系列或型号已经明确的标准零部件需求。</p>
           <ul><li>完整品牌与型号后缀</li><li>数量、单位与交期</li><li>是否接受替代型号</li></ul>
-          <a class="text-link" href="/rfq/?type=standard">整理标准件询价 ↗</a>
+          <a class="text-link" href="/rfq/?type=standard">整理标准件询价 <Icon /></a>
         </div>
       </article>
       <article class="service-visual">
@@ -90,7 +91,7 @@ const articles=await getCollection('knowledge');
           <h3>已有图纸，逐项确认要求</h3>
           <p>适用于板件、轴套、支架、治具等按图沟通的非标零件。</p>
           <ul><li>图纸版本与材料</li><li>关键公差与表面处理</li><li>数量、检验和交付要求</li></ul>
-          <a class="text-link" href="/custom-parts/">了解非标零件服务 ↗</a>
+          <a class="text-link" href="/custom-parts/">了解非标零件服务 <Icon /></a>
         </div>
       </article>
     </div>
@@ -99,24 +100,24 @@ const articles=await getCollection('knowledge');
 
 <section class="section process-section">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">PROCUREMENT PROCESS</p><h2>从需求到交付</h2></div><a class="text-link" href="/capabilities/">服务与交付 ↗</a></div>
+    <div class="section-head"><div><p class="eyebrow">PROCUREMENT PROCESS</p><h2>从需求到交付</h2></div><a class="text-link" href="/capabilities/">服务与交付 <Icon /></a></div>
     <div class="steps">{[['需求整理','型号、数量、图纸或使用条件'],['规格核对','尺寸、材质、工况与替代范围'],['报价确认','价格、交期与验收约定'],['交付沟通','进度、到货与异常反馈']].map(([h,p],i)=><article class="step"><b>0{i+1}</b><span class="step-line"></span><h3>{h}</h3><p>{p}</p></article>)}</div>
   </div>
 </section>
 
 <section class="section knowledge-home">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">ENGINEERING NOTES</p><h2>技术资料与选型参考</h2></div><a class="text-link" href="/knowledge/">全部技术资料 ↗</a></div>
+    <div class="section-head"><div><p class="eyebrow">ENGINEERING NOTES</p><h2>技术资料与选型参考</h2></div><a class="text-link" href="/knowledge/">全部技术资料 <Icon /></a></div>
     <div class="knowledge-feature-grid">
       {articles.slice(0,6).map((a,i)=>
         <a class:list={['knowledge-feature',i===0&&'featured']} href={`/knowledge/${a.id}/`}>
           <div class="knowledge-index">{String(i+1).padStart(2,'0')}</div>
-          <div><p class="eyebrow">{a.data.tag}</p><h3>{a.data.title}</h3><p>{a.data.description}</p><span class="text-link">阅读资料 ↗</span></div>
+          <div><p class="eyebrow">{a.data.tag}</p><h3>{a.data.title}</h3><p>{a.data.description}</p><span class="text-link">阅读资料 <Icon /></span></div>
         </a>
       )}
     </div>
   </div>
 </section>
 
-<section class="cta cta-v3"><div class="wrap"><div><p class="eyebrow">REQUEST FOR QUOTATION</p><h2>有型号，有图纸，都可以从一份清单开始。</h2><p>{site.contact.name} · {site.contact.phone} · {site.contact.email}</p></div><a class="button" href="/rfq/">整理询价需求 <span>↗</span></a></div></section>
+<section class="cta cta-v3"><div class="wrap"><div><p class="eyebrow">REQUEST FOR QUOTATION</p><h2>有型号，有图纸，都可以从一份清单开始。</h2><p>{site.contact.name} · {site.contact.phone} · {site.contact.email}</p></div><a class="button" href="/rfq/">整理询价需求 <span><Icon /></span></a></div></section>
 </Base>
