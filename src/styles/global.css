@@ -306,3 +306,188 @@ form .notice a,.service a,.generic-card a,.footer-grid a{overflow-wrap:anywhere}
   .article-section{padding-top:36px}
   .article-shell>.notice{margin-top:28px}
 }
+
+
+/* V6 mobile final pass: 320–820px */
+@media(max-width:820px){
+  .wrap{width:calc(100% - 36px)}
+  .utility .wrap{min-height:34px;align-items:center}
+  .header-inner{min-height:72px;flex-wrap:wrap}
+  .ribloxen-logo{width:198px}
+  .menu-toggle{min-height:42px;flex:0 0 auto}
+  nav#navigation.open{max-height:calc(100svh - 110px);overflow-y:auto;overscroll-behavior:contain}
+  .breadcrumbs{width:calc(100% - 36px);flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .breadcrumbs::-webkit-scrollbar{display:none}
+  .breadcrumbs>a,.breadcrumbs>span{flex:0 0 auto}
+  .breadcrumbs>span[aria-current="page"]{max-width:55vw}
+  .section-head{align-items:flex-start}
+  .section-head>.text-link{min-height:40px;display:inline-flex;align-items:center}
+  .product-hero-grid{gap:26px}
+  .product-hero .product-visual{box-shadow:none}
+  .product-body .content-grid{gap:24px}
+  .product-body .side-nav{margin:0 -18px;padding:2px 18px 14px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .product-body .side-nav::-webkit-scrollbar{display:none}
+  .product-body .side-nav a:first-of-type{margin-left:0}
+  .category-product-grid{gap:14px}
+  .generic-page-grid{gap:28px}
+  .generic-aside{margin-top:4px}
+  .rfq-layout{gap:28px}
+  .knowledge-index-grid{border-left:0}
+  .knowledge-index-card{border-left:1px solid var(--line)}
+  .article-shell{width:calc(100% - 36px)}
+  .article-shell .prose,.article-shell>.notice{max-width:none}
+  .prose{max-width:none}
+  .prose h2{margin-top:36px}
+  .details-table{max-width:100%}
+  .cta .wrap{gap:22px}
+  footer{padding-top:44px}
+}
+
+@media(max-width:480px){
+  .wrap{width:calc(100% - 28px)}
+  .utility .wrap{width:calc(100% - 28px);min-height:32px;padding-top:7px;padding-bottom:7px}
+  .utility{font-size:10px;letter-spacing:.04em}
+  .header-inner{width:calc(100% - 28px);min-height:66px;gap:8px}
+  .ribloxen-logo{width:176px}
+  .footer-logo .ribloxen-logo{width:190px}
+  .menu-toggle{min-height:40px;padding:7px 10px;gap:8px;font-size:13px}
+  .menu-toggle b{font-size:18px}
+  nav#navigation.open{padding-bottom:14px}
+  nav#navigation>a{min-height:46px;padding:12px 2px}
+  nav#navigation>a.button{min-height:46px;margin-top:10px}
+  .breadcrumbs{width:calc(100% - 28px);min-height:36px;padding-top:10px;font-size:10px;gap:7px}
+  .breadcrumbs>span[aria-current="page"]{max-width:58vw}
+  .eyebrow{margin-bottom:12px;font-size:9px;line-height:1.5;letter-spacing:.13em;overflow-wrap:anywhere}
+  .page-intro{padding:28px 0 32px}
+  .page-intro h1{font-size:30px;margin-bottom:12px}
+  .page-intro p{font-size:14px;line-height:1.75}
+  .hero-v3 .hero-grid{padding:28px 0 36px;gap:24px}
+  .hero h1{font-size:32px;line-height:1.2;margin-bottom:16px}
+  .hero-copy>p:not(.eyebrow){font-size:14px;line-height:1.75}
+  .hero-contact{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin-top:24px;padding-top:16px;font-size:11px}
+  .hero-contact span{grid-row:1/3;align-self:start;padding-top:2px}
+  .hero-contact a{min-width:0;overflow-wrap:anywhere}
+  .actions{gap:9px;margin-top:20px}
+  .actions>.button{min-height:48px;padding:13px 16px;gap:14px}
+  .hero-showcase{padding:12px}
+  .showcase-head{padding-bottom:10px}
+  .showcase-head b{font-size:22px}
+  .showcase-foot{padding:12px 0 2px;gap:5px}
+  .showcase-foot strong{font-size:16px}
+  .showcase-foot span{font-size:10px;line-height:1.5}
+  .showcase-tabs{margin-top:12px}
+  .showcase-tabs a{min-height:42px;display:flex;align-items:center;justify-content:center;padding:9px 3px;font-size:10px}
+  .hero-bottom div{grid-template-columns:76px 1fr;padding:12px 0!important;font-size:12px}
+  .hero-bottom small{font-size:9px}
+  .section{padding:38px 0}
+  .section-head{gap:10px;margin-bottom:20px}
+  .section-head h2{font-size:26px}
+  .section-head .eyebrow{margin-bottom:8px}
+  .section-note{gap:8px}
+  .section-note b{font-size:34px}
+  .section-note span{font-size:11px}
+  .visual-catalog{border-top:0}
+  .visual-category{grid-template-columns:102px minmax(0,1fr);min-height:116px}
+  .visual-category .product-visual{height:100%;min-height:116px}
+  .visual-category .product-visual svg{width:100%;height:100%;min-height:116px}
+  .visual-category-copy{min-width:0;padding:14px}
+  .visual-category .category-top{margin-bottom:10px}
+  .visual-category-copy h2,.visual-category-copy h3{font-size:17px;margin-bottom:5px}
+  .visual-category-copy small{font-size:8px;line-height:1.45;letter-spacing:.06em;margin-bottom:0;overflow-wrap:anywhere}
+  .section-action{margin-top:22px}
+  .section-action .button{width:100%}
+  .service-visual-grid{gap:14px}
+  .service-visual-art{padding:12px;max-height:190px}
+  .service-visual-art .product-visual{max-width:300px;margin:auto}
+  .service-visual-copy{padding:20px}
+  .service-visual-copy h3{font-size:21px}
+  .service-visual-copy p,.service-visual-copy li{font-size:13px}
+  .service-visual-copy ul{margin-bottom:8px}
+  .process-section .step{padding:18px 0}
+  .process-section .step b{font-size:25px;margin-bottom:8px}
+  .step-line{margin-bottom:15px}
+  .knowledge-feature{grid-template-columns:34px minmax(0,1fr);gap:10px;padding:16px}
+  .knowledge-index{font-size:18px}
+  .knowledge-feature h3{font-size:18px;line-height:1.45}
+  .knowledge-feature p{font-size:12px;line-height:1.7}
+  .cta{padding:34px 0}
+  .cta h2,.cta-v3 h2{font-size:25px;line-height:1.35}
+  .cta p{font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+  .cta .button{width:100%}
+  .product-hero{padding:28px 0 34px}
+  .product-hero-grid{gap:22px}
+  .product-hero-copy h1{font-size:30px;line-height:1.2;margin-bottom:14px}
+  .product-hero-copy>p:not(.eyebrow){font-size:14px;line-height:1.75}
+  .product-quick-tags{gap:6px;margin-top:18px}
+  .product-quick-tags span,.guide-tags span{padding:7px 9px;font-size:11px}
+  .product-hero .actions{margin-top:20px}
+  .product-body .content-grid{gap:20px}
+  .product-body .side-nav{margin:0 -14px;padding-left:14px;padding-right:14px}
+  .product-body .side-nav a{min-height:40px;padding:9px 11px;font-size:12px}
+  .category-product-card .product-visual{max-height:185px}
+  .category-product-card .product-visual svg{max-height:185px}
+  .category-product-copy{padding:18px}
+  .category-product-copy .category-top{margin-bottom:12px}
+  .category-product-copy h2{font-size:21px}
+  .category-product-copy p{font-size:12px;line-height:1.7}
+  .category-guide{margin-top:26px;padding:20px 16px}
+  .category-guide h2{font-size:23px}
+  .category-guide p{font-size:13px}
+  .category-guide>.button{width:100%}
+  .spec-panel{padding:20px 16px}
+  .spec-panel h2{font-size:23px}
+  .spec-panel li{padding:12px 0}
+  .generic-page-grid{gap:22px}
+  .generic-sections{gap:10px}
+  .generic-card{grid-template-columns:28px minmax(0,1fr);padding:16px;gap:10px}
+  .generic-index{font-size:16px}
+  .generic-card h2{font-size:19px;line-height:1.45;margin-bottom:8px}
+  .generic-card p{font-size:12.5px;line-height:1.75}
+  .generic-aside .service{padding:20px}
+  .generic-aside .service h2{font-size:23px}
+  .faq details{padding:17px 0}
+  .faq summary{font-size:14px}
+  .faq p{font-size:13px}
+  .knowledge-index-card{grid-template-columns:30px minmax(0,1fr);padding:16px;gap:10px}
+  .knowledge-index-number{font-size:16px}
+  .knowledge-index-card h2{font-size:19px;line-height:1.45}
+  .knowledge-index-card p{font-size:12.5px;line-height:1.7}
+  .article-shell{width:calc(100% - 28px)}
+  .article-section{padding-top:30px}
+  .prose{font-size:14px;line-height:1.8}
+  .prose h2{font-size:23px;line-height:1.4;margin:32px 0 14px}
+  .prose h3{font-size:19px;line-height:1.45;margin-top:24px}
+  .prose ul,.service ul{padding-left:18px}
+  .details-table{font-size:12px}
+  .details-table th,.details-table td{min-width:120px;padding:10px;font-size:12px}
+  .notice{padding:16px;margin:18px 0;font-size:12px;line-height:1.75}
+  .rfq-layout{gap:22px}
+  .form-grid{gap:16px}
+  label{font-size:13px}
+  label input,label select,label textarea{margin-top:7px;padding:12px;font-size:16px}
+  form label textarea{min-height:130px}
+  .form-status{font-size:12px}
+  .search-count{font-size:12px;margin-bottom:14px}
+  .product-card{padding:17px}
+  .product-card h2{font-size:19px}
+  .product-card p{font-size:12.5px;line-height:1.7}
+  .not-found-code{font-size:68px}
+  .not-found-grid h1{font-size:30px}
+  .not-found-grid>div:first-child>p:not(.eyebrow){font-size:14px}
+  footer{padding-top:38px}
+  .footer-grid{gap:26px}
+  .footer-grid h2{margin-bottom:14px}
+  .footer-grid p{margin-top:14px}
+  .footer-grid>div>a:not(.brand){min-height:32px;display:flex;align-items:center;margin:5px 0}
+  .footer-bottom{margin-top:30px;padding-top:18px;padding-bottom:22px;gap:8px;font-size:10px}
+}
+
+@media(max-width:350px){
+  .wrap,.header-inner,.utility .wrap,.breadcrumbs,.article-shell{width:calc(100% - 24px)}
+  .ribloxen-logo{width:162px}
+  .menu-toggle{padding:6px 8px;font-size:12px}
+  .hero h1,.product-hero-copy h1,.page-intro h1{font-size:28px}
+  .visual-category{grid-template-columns:92px minmax(0,1fr)}
+  .visual-category .product-visual,.visual-category .product-visual svg{min-height:110px}
+  .button{font-size:14px}
+}
