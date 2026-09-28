@@ -84,7 +84,7 @@ const jsonld=[
     </nav>
   </div>
 </header>
-{crumbs.length>0&&<nav class="wrap breadcrumbs" aria-label="面包屑"><a href="/">首页</a>{crumbs.map((x:any,i:number)=><><span aria-hidden="true">/</span>{i===crumbs.length-1?<span aria-current="page">{x.name}</span>:<a href={x.url}>{x.name}</a>}</>)}</nav>}
+{crumbs.length>0&&<div class="wrap breadcrumbs" role="navigation" aria-label="面包屑"><a href="/">首页</a>{crumbs.map((x:any,i:number)=><><span aria-hidden="true">/</span>{i===crumbs.length-1?<span aria-current="page">{x.name}</span>:<a href={x.url}>{x.name}</a>}</>)}</div>}
 <main id="main"><slot/></main>
 <footer>
   <div class="wrap footer-grid">
