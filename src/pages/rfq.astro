@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 ---
 <Base title="联系询价：整理标准件与非标件采购需求" description="整理自动化标准件型号、非标零件要求、数量和交期，下载询价清单并通过企业邮箱或电话联系 RIBLOXEN。" crumbs={[{name:'联系询价',url:'/rfq/'}]}>
 <section class="page-intro"><div class="wrap"><p class="eyebrow">REQUEST FOR QUOTATION</p><h1>把需求整理清楚，再开始报价沟通。</h1><p>在线提交暂未启用。可以在本页生成询价清单，再发送到企业邮箱，或直接电话联系。</p></div></section>
-<section class="section"><div class="wrap split">
+<section class="section"><div class="wrap split rfq-layout">
 <form id="rfq-form" data-email={site.contact.email}>
   <div class="notice">当前不会把表单内容提交到服务器。下载询价清单后，请发送至 <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>，或联系 {site.contact.name}：<a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a>。</div>
   <div class="form-grid">
