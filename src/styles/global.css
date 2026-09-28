@@ -187,3 +187,6 @@ header{background:#fff}.header-inner{min-height:88px}
   .cta{padding:40px 0}
   footer{padding-top:48px}
 }
+
+.aside-actions .aside-text-link{width:max-content;margin-top:6px}
+@media(max-width:480px){.aside-actions .aside-text-link{min-height:44px;display:inline-flex;align-items:center}}
