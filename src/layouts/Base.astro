@@ -76,15 +76,15 @@ const jsonld=[
 <header>
   <div class="wrap header-inner">
     <a class="brand brand-logo" href="/" aria-label="RIBLOXEN 首页"><Logo /></a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">菜单 <span>＋</span></button>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="打开主导航"><span>菜单</span><b aria-hidden="true">＋</b></button>
     <nav id="navigation" aria-label="主导航">
       {nav.map(([label,href])=><a href={href} aria-current={Astro.url.pathname.startsWith(href)?'page':undefined}>{label}</a>)}
-      <a class="nav-search" href="/search/" aria-label="搜索产品与资料">搜索</a>
+      <a class="nav-search" href="/search/" aria-label="搜索产品与资料"><Icon name="search" /> 搜索</a>
       <a class="button small" href="/rfq/">联系询价 <span><Icon /></span></a>
     </nav>
   </div>
 </header>
-{crumbs.length>0&&<div class="wrap breadcrumbs"><a href="/">首页</a>{crumbs.map((x:any)=><><span>/</span><a href={x.url}>{x.name}</a></>)}</div>}
+{crumbs.length>0&&<nav class="wrap breadcrumbs" aria-label="面包屑"><a href="/">首页</a>{crumbs.map((x:any,i:number)=><><span aria-hidden="true">/</span>{i===crumbs.length-1?<span aria-current="page">{x.name}</span>:<a href={x.url}>{x.name}</a>}</>)}</nav>}
 <main id="main"><slot/></main>
 <footer>
   <div class="wrap footer-grid">
@@ -115,12 +115,22 @@ const jsonld=[
   <div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {site.company}</span><a href="/privacy/">隐私说明</a><span>{site.contact.location}</span></div>
 </footer>
 <script>
-const toggle=document.querySelector('.menu-toggle');
+const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle');
+const navigation=document.querySelector<HTMLElement>('#navigation');
 toggle?.addEventListener('click',()=>{
-  const open=toggle.getAttribute('aria-expanded')==='true';
-  toggle.setAttribute('aria-expanded',String(!open));
-  document.querySelector('#navigation')?.classList.toggle('open',!open);
+  const next=toggle.getAttribute('aria-expanded')!=='true';
+  toggle.setAttribute('aria-expanded',String(next));
+  toggle.setAttribute('aria-label',next?'关闭主导航':'打开主导航');
+  const mark=toggle.querySelector('b');
+  if(mark) mark.textContent=next?'×':'＋';
+  navigation?.classList.toggle('open',next);
 });
+navigation?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+  toggle?.setAttribute('aria-expanded','false');
+  toggle?.setAttribute('aria-label','打开主导航');
+  const mark=toggle?.querySelector('b'); if(mark) mark.textContent='＋';
+  navigation?.classList.remove('open');
+}));
 </script>
 </body>
 </html>
