@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import ProductVisual from '../components/ProductVisual.astro';
 import {categories,site} from '../data/site';
 import {getCollection} from 'astro:content';
-const articles=await getCollection('knowledge');
+const articles=(await getCollection('knowledge')).sort((a,b)=>a.data.title.localeCompare(b.data.title,'zh-CN'));
 import Icon from '../components/Icon.astro';
 ---
 <Base title="自动化零部件供应与非标零件服务">
